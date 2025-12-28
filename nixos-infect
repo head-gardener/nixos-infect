@@ -196,8 +196,10 @@ checkExistingSwap() {
 }
 
 makeSwap() {
-  swapFile=$(mktemp /tmp/nixos-infect.XXXXX.swp)
-  dd if=/dev/zero "of=$swapFile" bs=1M count=$((1*1024))
+  swapFile=$(mktemp -u /tmp/nixos-infect.XXXXX.swp)
+  truncate -s 0 swapfile
+  chattr +C swapfile || true
+  fallocate -l 1G "$swapFile"
   chmod 0600 "$swapFile"
   mkswap "$swapFile"
   swapon -v "$swapFile"
