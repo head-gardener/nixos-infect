@@ -197,8 +197,8 @@ checkExistingSwap() {
 
 makeSwap() {
   swapFile=$(mktemp -u /tmp/nixos-infect.XXXXX.swp)
-  truncate -s 0 swapfile
-  chattr +C swapfile || true
+  truncate -s 0 "$swapFile"
+  chattr +C "$swapFile" || true
   fallocate -l 1G "$swapFile"
   chmod 0600 "$swapFile"
   mkswap "$swapFile"
