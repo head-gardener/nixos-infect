@@ -1,3 +1,17 @@
+# What's new
+
+TLDR:
+
+- Works with flakes.
+- Works on ubuntu 24.04.
+- Works on btrfs.
+
+New configuration options:
+
+- `NIXOS_FLAKE`: flake to build from.
+- `HOSTNAME`: hostname of the configuration in the flake to use.
+- `EVAL_STORE`: path to a nix store with pre-evaluated derivations to use.
+
 # NixOS-Infect
 
 ## What is this?
