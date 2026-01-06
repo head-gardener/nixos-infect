@@ -1,4 +1,4 @@
-#! /usr/bin/env bash
+#!/usr/bin/env bash
 
 # More info at: https://github.com/elitak/nixos-infect
 
@@ -388,19 +388,16 @@ checkEnv
 prepareEnv
 checkExistingSwap
 if [[ -z "$NO_SWAP" ]]; then
-    makeSwap # smallest (512MB) droplet needs extra memory!
-
     on_exit() {
       removeSwap || true
     }
+
+    makeSwap # smallest (512MB) droplet needs extra memory!
 
     trap on_exit EXIT
 fi
 makeConf
 infect
-if [[ -z "$NO_SWAP" ]]; then
-    removeSwap
-fi
 
 if [[ -z "$NO_REBOOT" ]]; then
   reboot
